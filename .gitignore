@@ -1,2 +1,5 @@
 .vscode/
 *.exe
+day-4/bin/
+day-4/obj/
+*.csproj
