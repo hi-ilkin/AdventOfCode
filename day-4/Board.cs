@@ -43,9 +43,9 @@ namespace day_4
             {
                 for (int c = 0; c < this.height; c++)
                 {
-                    if (this.board[r, c] == number && this.board[r, c] > 0)
+                    if (this.board[r, c] == number)
                     {
-                        this.board[r, c] *= -1; // marking drawn numbers by multiplying -1
+                        this.board[r, c] = -1; // marking drawn numbers by setting to -1
                     }
                 }
             }
@@ -84,7 +84,7 @@ namespace day_4
                 counter = 0;
                 for (int r = 0; r < this.width; r++)
                 {
-                    if (this.board[c, r] < 0)
+                    if (this.board[r, c] < 0)
                     {
                         counter++;
                     }
