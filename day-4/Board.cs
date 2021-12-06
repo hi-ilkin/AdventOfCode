@@ -73,7 +73,6 @@ namespace day_4
                 }
                 if (counter == width)
                 {
-                    Console.WriteLine("Row winner");
                     this.boardWon = true;
                     return true;
                 }
@@ -95,7 +94,6 @@ namespace day_4
                 }
                 if (counter == height)
                 {
-                    Console.WriteLine("Col winner");
                     this.boardWon = true;
                     return true;
                 }
