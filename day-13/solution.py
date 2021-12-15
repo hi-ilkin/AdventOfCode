@@ -5,6 +5,7 @@ import numpy as np
 from utils import timeit
 
 
+@timeit
 def get_data(fname):
     is_fold = False
     folds = []
@@ -53,7 +54,8 @@ def fold_multiple(paper, folds):
     return paper
 
 
-if __name__ == '__main__':
+@timeit
+def main():
     input_name = 'input.txt'
     p, f = get_data(input_name)
 
@@ -67,3 +69,7 @@ if __name__ == '__main__':
 
     # print(folded)
     print(f'Dots: {np.count_nonzero(folded)}')
+
+
+if __name__ == '__main__':
+    main()
