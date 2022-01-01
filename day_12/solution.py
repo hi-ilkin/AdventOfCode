@@ -36,7 +36,8 @@ def main():
     graph = get_cave_map(fname)
     depth_first(graph, 'start', [], visited_list)
 
-
+    # for l in visited_list:
+    #     print(l)
 
     print(f"Number of possible paths: {len(visited_list)}")
 
