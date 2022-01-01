@@ -15,6 +15,7 @@ import day_13.solution as d13
 import day_14.solution as d14
 import day_15.solution as d15
 import day_17.solution as d17
+import day_25.solution as d25
 
 
 def parse_arguments():
@@ -42,6 +43,7 @@ solutions = {
     '14': d14.main,
     '15': d15.main,
     '17': d17.main,
+    '25': d25.main,
 }
 
 if __name__ == '__main__':
