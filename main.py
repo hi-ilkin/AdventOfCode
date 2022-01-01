@@ -12,6 +12,7 @@ import day_10.solution as d10
 import day_11.solution as d11
 import day_12.solution as d12
 import day_13.solution as d13
+import day_14.solution as d14
 import day_15.solution as d15
 
 
@@ -37,6 +38,7 @@ solutions = {
     # '11': d11.main,
     '12': d12.main,
     '13': d13.main,
+    '14': d14.main,
     '15': d15.main,
 }
 
