@@ -35,7 +35,7 @@ solutions = {
     # '9': d9.main,
     # '10': d10.main,
     # '11': d11.main,
-    # '12': d12.main,
+    '12': d12.main,
     '13': d13.main,
     '15': d15.main,
 }

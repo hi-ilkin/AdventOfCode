@@ -1,4 +1,5 @@
-from collections import defaultdict, deque
+import os
+from collections import defaultdict
 
 from utils import timeit
 
@@ -6,6 +7,7 @@ from utils import timeit
 @timeit
 def get_cave_map(fname):
     cave_map = defaultdict(list)
+    print(os.getcwd())
     for line in open(fname).readlines():
         d1, d2 = line.strip().split('-')
         cave_map[d1].append(d2)
@@ -14,31 +16,31 @@ def get_cave_map(fname):
     return cave_map
 
 
-def get_possible_neighbors(cur_node, cave_map, cur_route, route_stack):
-    for node in cave_map[cur_node]:
-        if node.islower() and node in cur_route and node == 'start':
-            continue
-        elif node == 'end':
-            cur_route.append('end')
-            return cur_route
-        else:
-            route_stack.append(node)
+def depth_first(graph, current_vertex, visited, visited_list):
+    if current_vertex == 'end':
+        visited.append('end')
+        visited_list.append(visited)
+        return
 
-    next_node = route_stack.pop()
-    cur_route.append(next_node)
-    return get_possible_neighbors(next_node, cave_map, cur_route, route_stack)
+    visited.append(current_vertex)
+
+    for vertex in graph[current_vertex]:
+        if vertex.isupper() or vertex not in visited:
+            depth_first(graph, vertex, visited.copy(), visited_list)
 
 
-def find_all_routes(cave_map):
-    route_stack = deque()
-    cur_route = ['start']
+@timeit
+def main():
+    fname = 'inputs/12.txt'
+    visited_list = []
+    graph = get_cave_map(fname)
+    depth_first(graph, 'start', [], visited_list)
 
-    res = get_possible_neighbors('start', cave_map, cur_route, route_stack)
-    print(res)
+    # for l in visited_list:
+    #     print(l)
+
+    print(f"Number of possible paths: {len(visited_list)}")
 
 
 if __name__ == '__main__':
-    fname = 'small-input.txt'
-    cm = get_cave_map(fname)
-    print(cm)
-    find_all_routes(cm)
+    main()
