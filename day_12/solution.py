@@ -1,5 +1,5 @@
 import os
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 from utils import timeit
 
@@ -16,7 +16,20 @@ def get_cave_map(fname):
     return cave_map
 
 
-def depth_first(graph, current_vertex, visited, visited_list):
+def should_visit_next(vertex, visited, part):
+    c1 = vertex.isupper() or vertex not in visited
+    if c1:
+        return c1
+
+    if part == 2:
+        if vertex in ['start', 'end']:
+            return False
+        counter = Counter(list(filter(lambda x: x.islower() and x not in ['start', 'end'], visited))).values()
+        c2 = max(counter if len(counter) > 0 else [0]) <= 1
+        return c2
+
+
+def depth_first(graph, current_vertex, visited, visited_list, part=1):
     if current_vertex == 'end':
         visited.append('end')
         visited_list.append(visited)
@@ -25,21 +38,30 @@ def depth_first(graph, current_vertex, visited, visited_list):
     visited.append(current_vertex)
 
     for vertex in graph[current_vertex]:
-        if vertex.isupper() or vertex not in visited:
-            depth_first(graph, vertex, visited.copy(), visited_list)
+        if should_visit_next(vertex, visited, part):
+            depth_first(graph, vertex, visited.copy(), visited_list, part)
+
+
+def solve_part_1(graph):
+    visited_list = []
+    depth_first(graph, 'start', [], visited_list, part=1)
+    return len(visited_list)
+
+
+def solve_part_2(graph):
+    visited_list = []
+    depth_first(graph, 'start', [], visited_list, part=2)
+    return len(visited_list)
 
 
 @timeit
 def main():
     fname = 'inputs/12.txt'
-    visited_list = []
     graph = get_cave_map(fname)
-    depth_first(graph, 'start', [], visited_list)
-
-    # for l in visited_list:
-    #     print(l)
-    # one more try - again
-    print(f"Number of possible paths: {len(visited_list)}")
+    res_1 = solve_part_1(graph)
+    res_2 = solve_part_2(graph)
+    print(f'1a: {res_1}')
+    print(f'1b: {res_2}')
 
 
 if __name__ == '__main__':
