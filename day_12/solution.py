@@ -38,7 +38,7 @@ def main():
 
     # for l in visited_list:
     #     print(l)
-
+#
     print(f"Number of possible paths: {len(visited_list)}")
 
 
